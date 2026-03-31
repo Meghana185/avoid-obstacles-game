@@ -17,6 +17,8 @@ function startGame() {
   homeScreen.style.display = "none";
   gameArea.style.display = "block";
 
+  document.getElementById("controls").style.display = "flex";
+
   carX = gameArea.clientWidth / 2 - 25; // center car
   car.style.left = carX + "px";
 
