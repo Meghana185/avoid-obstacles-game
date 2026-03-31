@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Avoid the Obstacles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Avoid the Obstacles 🚗</h1>
+<p>Score: <span id="score">0</span></p>
+
+<!-- Home Screen -->
+<div id="homeScreen">
+  <h2>Avoid the Obstacles 🚗</h2>
+  <button onclick="startGame()">Play</button>
+</div>
+
+<!-- Game Area -->
+<div id="gameArea" style="display:none;">
+
+  <!-- Road -->
+  <div id="road"></div>
+
+  <!-- Pause Button -->
+  <button id="pauseBtn" onclick="togglePause()">Pause</button>
+
+  <!-- Car -->
+  <img id="car" src="https://cdn-icons-png.flaticon.com/512/744/744465.png">
+
+  <!-- Obstacle -->
+  <div id="obstacle"></div>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen" style="display:none;">
+    <h2>Game Over!</h2>
+    <p>Your Score: <span id="finalScore"></span></p>
+    <button onclick="restartGame()">Restart</button>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
