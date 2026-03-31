@@ -2,11 +2,16 @@
 <html>
 <head>
   <title>Avoid the Obstacles</title>
+
+  <!-- 🔥 IMPORTANT FOR MOBILE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>Avoid the Obstacles 🚗</h1>
+
 <p>Score: <span id="score">0</span></p>
 
 <!-- Home Screen -->
@@ -37,6 +42,12 @@
     <button onclick="restartGame()">Restart</button>
   </div>
 
+</div>
+
+<!-- 📱 MOBILE CONTROLS -->
+<div id="controls">
+  <button onclick="moveLeft()">⬅️</button>
+  <button onclick="moveRight()">➡️</button>
 </div>
 
 <script src="script.js"></script>
