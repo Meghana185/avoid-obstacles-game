@@ -9,13 +9,19 @@ let homeScreen = document.getElementById("homeScreen");
 
 let carX = 175;
 let score = 0;
-let gameRunning = false; // 🔥 start only after Play
+let gameRunning = false;
 let isPaused = false;
 
 // ▶️ START GAME
 function startGame() {
   homeScreen.style.display = "none";
   gameArea.style.display = "block";
+
+  carX = gameArea.clientWidth / 2 - 25; // center car
+  car.style.left = carX + "px";
+
+  score = 0;
+  scoreDisplay.innerText = score;
 
   gameRunning = true;
   moveObstacle();
@@ -34,24 +40,39 @@ function togglePause() {
   }
 }
 
-// 🚗 Move car
+// 🚗 KEYBOARD CONTROL
 document.addEventListener("keydown", function(e) {
   if (!gameRunning || isPaused) return;
 
-  if (e.key === "ArrowLeft" && carX > 0) {
-    carX -= 25;
-  }
-  if (e.key === "ArrowRight" && carX < 350) {
-    carX += 25;
-  }
-
-  car.style.left = carX + "px";
+  if (e.key === "ArrowLeft") moveLeft();
+  if (e.key === "ArrowRight") moveRight();
 });
 
-// 🚧 Obstacle movement
+// 📱 MOBILE BUTTON CONTROLS
+function moveLeft() {
+  if (!gameRunning || isPaused) return;
+
+  if (carX > 0) {
+    carX -= 25;
+    car.style.left = carX + "px";
+  }
+}
+
+function moveRight() {
+  if (!gameRunning || isPaused) return;
+
+  let maxWidth = gameArea.clientWidth - 50;
+
+  if (carX < maxWidth) {
+    carX += 25;
+    car.style.left = carX + "px";
+  }
+}
+
+// 🚧 OBSTACLE MOVEMENT
 function moveObstacle() {
   let obstacleY = 0;
-  let obstacleX = Math.random() * 350;
+  let obstacleX = Math.random() * (gameArea.clientWidth - 50);
   obstacle.style.left = obstacleX + "px";
 
   let interval = setInterval(() => {
@@ -60,12 +81,12 @@ function moveObstacle() {
       return;
     }
 
-    if (isPaused) return; // 🔥 pause logic
+    if (isPaused) return;
 
     obstacleY += 6;
     obstacle.style.top = obstacleY + "px";
 
-    // Collision detection
+    // COLLISION DETECTION
     let carRect = car.getBoundingClientRect();
     let obsRect = obstacle.getBoundingClientRect();
 
@@ -78,10 +99,10 @@ function moveObstacle() {
       gameOver();
     }
 
-    // Reset obstacle
-    if (obstacleY > 500) {
+    // RESET OBSTACLE
+    if (obstacleY > gameArea.clientHeight) {
       obstacleY = 0;
-      obstacleX = Math.random() * 350;
+      obstacleX = Math.random() * (gameArea.clientWidth - 50);
       obstacle.style.left = obstacleX + "px";
 
       score++;
@@ -98,7 +119,7 @@ function gameOver() {
   gameOverScreen.style.display = "flex";
 }
 
-// 🔄 Restart
+// 🔄 RESTART
 function restartGame() {
   location.reload();
 }
